@@ -5,13 +5,13 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
            version="3.1">
     <servlet>
-        <servlet-name>Solver</servlet-name>
+        <servlet-name>SolverServlet</servlet-name>
         <servlet-class>SolverServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>Solver</servlet-name>
-        <url-pattern>/Solver</url-pattern>
+        <servlet-name>SolverServlet</servlet-name>
+        <url-pattern>/SolverServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
