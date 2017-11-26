@@ -45,30 +45,36 @@ public class SolverServlet extends HttpServlet {
         double x2 = 0;
         DecimalFormat decFormat = new DecimalFormat("#.####");
 
-
-        if (discr > 0) {
-            // r = -b / 2 * a;
-            x1 = (-b + Math.sqrt(discr)) / (2 * a);
-            x2 = (-b - Math.sqrt(discr)) / (2 * a);
-            System.out.println("The equation has two real roots " + x1 + " and " + x2);
-            result = "{\"x1\":\"" + decFormat.format(x1) + "\", " + "\"x2\":\"" + decFormat.format(x2) + "\"}";
+        if (b == 0 && c == 0) {
+            result = ("{\"x1\":\"" + 0 + "\"}");
+            System.out.println("result is 0");
             return String.valueOf(result);
-        }
-        if (discr == 0) {
-            x1 = -b / (2 * a);
-            System.out.println("The equation has one root " + x1);
-            result = ("{\"x1\":\"" + decFormat.format(x1) + "\"}");
-            return String.valueOf(result);
-        }
-        if (discr < 0) {
-            System.out.println("discr<0");
-            x1 = (-b + Math.sqrt(Math.abs(discr))) / (2 * a);
-            x2 = (-b - Math.sqrt(Math.abs(discr))) / (2 * a);
+        } else {
+            if (discr > 0) {
+                // r = -b / 2 * a;
+                x1 = (-b + Math.sqrt(discr)) / (2 * a);
+                x2 = (-b - Math.sqrt(discr)) / (2 * a);
+                System.out.println("The equation has two real roots " + x1 + " and " + x2);
+                result = "{\"x1\":\"" + decFormat.format(x1) + "\", " + "\"x2\":\"" + decFormat.format(x2) + "\"}";
+                return String.valueOf(result);
+            }
+            if (discr == 0) {
+                x1 = -b / (2 * a);
+                System.out.println("The equation has one root " + x1);
+                result = ("{\"x1\":\"" + decFormat.format(x1) + "\"}");
+                return String.valueOf(result);
+            }
+            if (discr < 0) {
+                System.out.println("discr<0");
+                x1 = (-b + Math.sqrt(Math.abs(discr))) / (2 * a);
+                x2 = (-b - Math.sqrt(Math.abs(discr))) / (2 * a);
 
 
-            System.out.println("The equation has two imagine roots " + x1 + "i" + " and " + x2 + "i");
-            result = ("{\"x1\": \"" + decFormat.format(x1) + "i\"" + ", " + "\"x2\": \"" + decFormat.format(x2) + "i\"}");
-            return String.valueOf(result);
+                System.out.println("The equation has two imagine roots " + x1 + "i" + " and " + x2 + "i");
+                result = ("{\"x1\": \"" + decFormat.format(x1) + "i\"" + ", " + "\"x2\": \"" + decFormat.format(x2) + "i\"}");
+                return String.valueOf(result);
+            }
+
         }
         return null;
     }
