@@ -1,4 +1,5 @@
-import jdk.nashorn.internal.runtime.JSONFunctions;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 @WebServlet("/SolverServlet")
 public class SolverServlet extends HttpServlet {
@@ -20,9 +22,14 @@ public class SolverServlet extends HttpServlet {
         System.out.println("a: " + req.getParameter("coeffA"));
         System.out.println("b: " + req.getParameter("coeffB"));
         System.out.println("c: " + req.getParameter("coeffC"));
-        solve(a, b, c);
-//        PrintWriter writer = resp.getWriter();
-//        writer.println(a+b+c);
+        String jsonRes = solve(a, b, c);
+        System.out.println("jsonRes: " + jsonRes);
+
+
+        PrintWriter writer = resp.getWriter();
+        resp.setContentType("text/json");
+        writer.print(jsonRes);
+        writer.flush();
     }
 
     @Override
@@ -31,31 +38,36 @@ public class SolverServlet extends HttpServlet {
     }
 
     public String solve(double a, double b, double c) {
-        StringBuilder result = null;
+        String result = null;
         double discr = Math.pow(b, 2) - (4 * a * c);
         System.out.println("discr: " + discr);
         double x1 = 0;
         double x2 = 0;
+        DecimalFormat decFormat = new DecimalFormat("#.####");
+
+
         if (discr > 0) {
             // r = -b / 2 * a;
             x1 = (-b + Math.sqrt(discr)) / (2 * a);
             x2 = (-b - Math.sqrt(discr)) / (2 * a);
             System.out.println("The equation has two real roots " + x1 + " and " + x2);
-            result.append("x1:" + x1 + ", " + "x2:" + x2);
+            result = "{\"x1\":\"" + decFormat.format(x1) + "\", " + "\"x2\":\"" + decFormat.format(x2) + "\"}";
             return String.valueOf(result);
         }
         if (discr == 0) {
             x1 = -b / (2 * a);
             System.out.println("The equation has one root " + x1);
-            result.append("x1:" + x1 + ", " + "x2:" + x2);
+            result = ("{\"x1\":\"" + decFormat.format(x1) + "\"}");
             return String.valueOf(result);
         }
         if (discr < 0) {
             System.out.println("discr<0");
             x1 = (-b + Math.sqrt(Math.abs(discr))) / (2 * a);
             x2 = (-b - Math.sqrt(Math.abs(discr))) / (2 * a);
-            System.out.println("The equation has two real roots " + x1 + "i" + " and " + x2 + "i");
-            result.append("x1:" + x1 + "i" + ", " + "x2:" + x2 + "i");
+
+
+            System.out.println("The equation has two imagine roots " + x1 + "i" + " and " + x2 + "i");
+            result = ("{\"x1\": \"" + decFormat.format(x1) + "i\"" + ", " + "\"x2\": \"" + decFormat.format(x2) + "i\"}");
             return String.valueOf(result);
         }
         return null;

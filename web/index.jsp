@@ -21,17 +21,19 @@
         <input id="coeffB" type="number" placeholder="B" required> <b>*X<!--<sup>1</sup>-->+</b>
         <input id="coeffC" type="number" placeholder="C" required> <b>= 0</b>
         <hr/>
-        <input class="button" type="button" title="Solve" value="Solve" onclick="send_request()"
-               onsubmit="send_request()">
+        <input class="button" type="button" title="Solve" value="Solve" onclick="send_request()">
     </form>
 </div>
-<div class="border"></div>
-<table class="center">
+<%--<div id="response" style="font-size: 50px"></div>--%>
+
+<table class="center" id="results">
     <caption>Результаты вычислений</caption>
+    <tbody>
     <tr>
         <th>Значения коэффициентов</th>
-        <th>Результат</th>
+        <th>Корни уравнения</th>
     </tr>
+    </tbody>
 </table>
 </body>
 </html>
