@@ -1,5 +1,3 @@
-package main.java;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 
-@WebServlet("/main.java.SolverServlet")
+@WebServlet("/SolverServlet")
 public class SolverServlet extends HttpServlet {
 
     @Override
