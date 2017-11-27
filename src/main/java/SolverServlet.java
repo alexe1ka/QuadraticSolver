@@ -1,5 +1,4 @@
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+package main.java;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 
-@WebServlet("/SolverServlet")
+@WebServlet("/main.java.SolverServlet")
 public class SolverServlet extends HttpServlet {
 
     @Override

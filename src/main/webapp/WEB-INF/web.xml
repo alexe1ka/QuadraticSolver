@@ -6,7 +6,7 @@
            version="3.1">
     <servlet>
         <servlet-name>SolverServlet</servlet-name>
-        <servlet-class>SolverServlet</servlet-class>
+        <servlet-class>main.java.SolverServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
